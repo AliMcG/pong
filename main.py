@@ -30,18 +30,20 @@ while game_is_on:
 
     if ball.distance(paddle_2) < 50 and ball.xcor() > 337:
         ball.bounce_x()
-    if ball.distance(paddle_1) < 50 and ball.xcor() > -345:
+    if ball.distance(paddle_1) < 49 and ball.xcor() > -341:
         ball.bounce_x()
         # BUG!- the ball bounces on and off the paddle until it clears the paddle.
 
-    if ball.xcor() > 400 or ball.xcor() < -400:
+    if ball.xcor() > 395:
+        ball.ht()
         ball = Ball(START_POS)
-        # print("why two balls")
-        # score
-    if ball.xcor() > 390:
+        ball.bounce_x()
         scoreboard.player1_score += 1
         scoreboard.increase_score()
-    if ball.xcor() < -390:
+
+    if ball.xcor() < -395:
+        ball.ht()
+        ball = Ball(START_POS)
         scoreboard.player2_score += 1
         scoreboard.increase_score()
 

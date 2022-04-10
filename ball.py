@@ -27,12 +27,6 @@ class Ball(Turtle):
     def bounce_x(self):
         self.x_move *= -1
 
-    def of_screen(self):
-        pass
-
-
-
-
         # bounce down right:
         # new_x = self.xcor() - 10
         # new_y = self.ycor() - 10
