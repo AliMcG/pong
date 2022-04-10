@@ -1,13 +1,14 @@
 from turtle import Screen
 from paddle import Paddle, PLAYER_1_START, PLAYER_2_START
 from ball import Ball, START_POS
+from scoreboard import Scoreboard
 import time
 screen = Screen()
 screen.setup(width=800, height=600)
 screen.bgcolor("black")
 screen.title("Pong")
 screen.tracer(0)
-
+scoreboard = Scoreboard()
 paddle_1 = Paddle(PLAYER_1_START)
 paddle_2 = Paddle(PLAYER_2_START)
 ball = Ball(START_POS)
@@ -23,5 +24,25 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
     ball.move()
+
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.bounce_y()
+
+    if ball.distance(paddle_2) < 50 and ball.xcor() > 337:
+        ball.bounce_x()
+    if ball.distance(paddle_1) < 50 and ball.xcor() > -345:
+        ball.bounce_x()
+        # BUG!- the ball bounces on and off the paddle until it clears the paddle.
+
+    if ball.xcor() > 400 or ball.xcor() < -400:
+        ball = Ball(START_POS)
+        # print("why two balls")
+        # score
+    if ball.xcor() > 390:
+        scoreboard.player1_score += 1
+        scoreboard.increase_score()
+    if ball.xcor() < -390:
+        scoreboard.player2_score += 1
+        scoreboard.increase_score()
 
 screen.exitonclick()
